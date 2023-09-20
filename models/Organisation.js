@@ -21,13 +21,17 @@ const regUsers=mongoose.Schema({
             required:[true,'Please enter a valid category']
         },
         dateOfIssue:{
-            type:String,
+            type:Date,
             required:[true,'Please enter a valid date']
         },
     issuedBy:{
         type:String,
         required:[true,'Please enter a valid name']
-        }
+        },
+
+    hashPdss:{
+        type:String
+    }
 
     
     
@@ -64,7 +68,13 @@ username:{
 },
 regestiredUsers:[regUsers],
 
-history:[]
+history:[
+    {
+        tokenAddress:{
+            type:String
+        }
+    }
+]
 });
 
 

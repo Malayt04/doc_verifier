@@ -9,6 +9,7 @@ const orgDashboard = async(req,res)=>{
     const org = await Organisation.findById(id);
 
     if (org) {
+      
       const { password, ...otherDetails } = org._doc;
 
       res.status(200).json(otherDetails);
