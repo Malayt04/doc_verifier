@@ -1,5 +1,7 @@
 const  Organisation=require('../models/Organisation');
 
+
+
 const orgDashboard = async(req,res)=>{
   const id = req.params.id;
 
@@ -14,7 +16,7 @@ const orgDashboard = async(req,res)=>{
       res.status(404).json("No such user exists");
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({error:error.message});
   }
 }
 
@@ -49,7 +51,7 @@ const postIssueForm = async (req, res) => {
   
   
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({error:error.message});
   }
 }
 

@@ -21,7 +21,7 @@ const regUsers=mongoose.Schema({
             required:[true,'Please enter a valid category']
         },
         dateOfIssue:{
-            type:Date,
+            type:String,
             required:[true,'Please enter a valid date']
         },
     issuedBy:{
@@ -32,8 +32,6 @@ const regUsers=mongoose.Schema({
     
     
 })
-
-
 
 
 
@@ -54,7 +52,8 @@ validate:[isEmail,'Please enter a valid email address']
 ,
 password: {
     type: String,
-    required: [true, 'Please enter a valid password']
+    required: [true, 'Please enter a valid password'],
+    minlength: [8,'password should be at least 8 characters']
 },
 
 username:{
@@ -68,6 +67,14 @@ regestiredUsers:[regUsers],
 history:[]
 });
 
+
+orgSchema.pre('save',async function(next){
+    const salt=await bcrypt.genSalt();
+    this.password=await bcrypt.hash(this.password,salt);
+     next();
+  })
+
+
 orgSchema.statics.login=async function (username,password){
     const org=await this.findOne({username});
     if(org){
@@ -78,9 +85,12 @@ orgSchema.statics.login=async function (username,password){
       }
       throw Error('Incorrect password');
     }
-    throw Error('incorrect email');
+    throw Error('incorrect username')
+    ;
     }
     
+
+
 
 const Organisation=mongoose.model('Organisation',orgSchema);
 

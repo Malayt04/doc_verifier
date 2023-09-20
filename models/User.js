@@ -26,9 +26,9 @@ const userSchema = new mongoose.Schema({
     ,
     password:{
         type:String,
-        required:[true,'Please enter a valid password']
+        required:[true,'Please enter a valid password'],
+        minlength:[8,'Password must be at least 8 characters']
     },
-    
     username:{
         type:String,
         unique:true,
@@ -38,6 +38,14 @@ const userSchema = new mongoose.Schema({
     history:[]
 
 });
+
+
+
+userSchema.pre('save',async function(next){
+  const salt=await bcrypt.genSalt();
+  this.password=await bcrypt.hash(this.password,salt);
+   next();
+})
 
 
 userSchema.statics.login = async function (username, password) {
