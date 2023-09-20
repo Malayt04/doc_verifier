@@ -5,60 +5,6 @@ const bcrypt=require('bcrypt');
 
 
 
-const userHandleError=(err)=>{
-    console.log(err.message,err.code);
-    let errors = {firstName:'',lastName:'',email:'',username:'',password:'' };
-
-    if(err.message.includes('user validation failed')){
-        Object.values(err.errors).forEach(({properties})=>{
-            errors[properties.path]=properties.message;
-        });
-    }
-
-    if(err.message=='incorrect email'){
-        errors.email='incorrect email';
-    }
-    if(err.message=='incorrect password'){
-        errors.password='incorrect password';
-    }
-
-    if(err.code==11000){
-        errors.email='That email already exists';
-    }
-    return errors;
-}
-
-
-
-
-
-
-
-const organisationHandleError=(err)=>{
-    console.log(err.message,err.code);
-    let errors = { name: '', email: '', username: '', password: '' };
-
-    if(err.message.includes('Organisation validation failed')){
-        Object.values(err.errors).forEach(({properties})=>{
-            errors[properties.path]=properties.message;
-        });
-    }
-
-    if(err.message=='incorrect email'){
-        errors.email='incorrect email';
-    }
-    if(err.message=='incorrect password'){
-        errors.password='incorrect password';
-    }
-
-    if(err.code==11000){
-        errors.email='That email already exists';
-    }
-    return errors;
-}
-
-
-
 const maxAge=3*24*60*60;
 
 
@@ -84,8 +30,8 @@ const postLoginPage=async(req,res)=>{
       res.cookie('jwt',token,{httpOnly:true,maxAge:maxAge*1000});
       res.status(200).json({org:org._id});
     } catch (error) {
-       const err = organisationHandleError(error);
-        res.status(400).json({err})
+       console.log(error);
+        res.status(400).json({error})
     }
 }
 
@@ -99,11 +45,11 @@ const postSignUpPage = async (req, res) => {
       await org.save();
       const token = createToken(org._id);
       res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-      console.log(org);
-      res.status(200).json({ org: org._id });
+      console.log(org._id);
+      res.status(200).json({ org:org._id});
     } catch (error) {
-      const err = organisationHandleError(error);
-      res.status(400).json({ err });
+        console.log(error);
+        res.status(400).json({error:error.message})
     }
   }
 const getUserSignUpPage=(req,res)=>{
@@ -123,8 +69,8 @@ const postUserLoginPage = async (req, res) => {
       res.cookie('jwt',token,{httpOnly:true,maxAge:maxAge*1000});
       res.status(200).json({ user: user._id });
     } catch (error) {
-        const err = userHandleError(error);
-        res.status(400).json({err})
+        console.log(error);
+        res.status(400).json({error:error.message})
     }
   };
   
@@ -140,8 +86,8 @@ const postUserSignUpPage=async (req,res)=>{
         console.log(user);
         res.status(200).json({user});
     } catch (error) {
-        const err = userHandleError(error);
-        res.status(400).json({err})
+        console.log(error);
+        res.status(400).json({error:error.message})
     }
 }
 
