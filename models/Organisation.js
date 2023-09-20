@@ -35,18 +35,13 @@ username:{
 regestiredUsers:[
     {
 
-        firstName:{
-            type:String,
-            required: [true,'Please enter a name'],
-        },
-        lastName:{
+        fullName:{
             type:String,
             required: [true,'Please enter a name'],
         },
         userEmail:{
             type:String,
             required:[true,'Please enter a valid email address'],
-            unique:true,
             lowercase:true,
             validate:[isEmail,'Please enter a valid email address']
             },
@@ -55,14 +50,17 @@ regestiredUsers:[
             required:[true,'Please enter a valid category']
         },
         dateOfIssue:{
-            type:String,
+            type:Date,
             required:[true,'Please enter a valid date']
         },
     issuedBy:{
         type:String,
         required:[true,'Please enter a valid name']
         }
-        
+        ,
+    hashedPassword:{
+        type:String
+    }
     
     }
 
