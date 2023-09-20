@@ -5,6 +5,11 @@ const orgDashboard = (req,res)=>{
   res.send(id);
 }
 
+const orgHistory=(req,res)=>{
+res.send('history');
+}
+
+
 const getIssueForm=(req,res)=>{
     res.send('form');
 }
@@ -17,19 +22,23 @@ const postIssueForm = async (req, res) => {
   try {
     const organisation = await Organisation.findById(id);
 
-    if (!organisation) {
-      return res.status(404).json({ error: 'Organisation not found' });
+    if (organisation) {
+      organisation.regestiredUsers.push(userData);
+      await organisation.save();
+  
+      res.status(200).json({ organisation });
+     
+    }
+    else{
+      return res.status(400).json({ error: 'Organisation not found' });
     }
 
   
-    organisation.regestiredUsers.push(userData);
-    await organisation.save();
-
-    res.status(200).json({ organisation });
+  
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 }
 
 
-module.exports={orgDashboard,getIssueForm,postIssueForm}
+module.exports={orgDashboard,getIssueForm,postIssueForm,orgHistory}

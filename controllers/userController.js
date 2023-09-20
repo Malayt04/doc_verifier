@@ -7,4 +7,9 @@ const getUserIssueForm=(req,res)=>{
       res.send('user issue form');
 }
 
-module.exports ={getUserIssueForm,userDashboard};
+
+const getUserHistory=(req,res)=>{
+    res.send('user history form');
+}
+
+module.exports ={getUserIssueForm,userDashboard,getUserHistory};

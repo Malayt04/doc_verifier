@@ -16,6 +16,7 @@ const handleError=(err)=>{
     }
 
     if(err.code==11000){
+
         errors.email='That email already exists';
     }
     return errors;

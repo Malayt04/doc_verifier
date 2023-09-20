@@ -35,7 +35,8 @@ const userSchema = new mongoose.Schema({
         unique:true,
         required:[true,'Please enter a username'],
         minlength:[3,'Username of the user should be longer than 3 characters']
-    }
+    },
+    history:[]
 
 });
 
