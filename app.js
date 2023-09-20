@@ -5,7 +5,7 @@ const authRoutes=require('./Routes/authRoute');
 const orgRoutes=require('./Routes/organisationRoute');
 const userRoutes=require('./Routes/userRoute');
 const bodyParser=require('body-parser');
-
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 const app=express();
@@ -16,6 +16,10 @@ app.use('/auth',authRoutes);
 app.use('/org',orgRoutes);
 app.use('/user',userRoutes);
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
+
 
 mongoose.connect(process.env.URI,{ useNewUrlParser: true, useUnifiedTopology: true })
 .then(app.listen(process.env.PORT,()=>{
@@ -26,7 +30,7 @@ mongoose.connect(process.env.URI,{ useNewUrlParser: true, useUnifiedTopology: tr
 
 
 app.get('/',(req,res)=>{
-    res.send("Helllo");
+    res.send("Welcome to our home page");
 })
 
 
