@@ -3,7 +3,7 @@ const {orgDashboard,getIssueForm,postIssueForm} = require('../controllers/orgCon
 
 const router=express.Router();
 
-router.route('/org/:id').get(orgDashboard);
+router.route('/:id').get(orgDashboard);
 router.route('/:id/issue-certificate').get(getIssueForm).post(postIssueForm);
 
 module.exports=router;
