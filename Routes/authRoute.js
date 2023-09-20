@@ -4,10 +4,10 @@ const{ getSignUpPage,postSignUpPage,getLoginPage,postLoginPage, getUserSignUpPag
 
 const router=express.Router();
 
-router.route('/register/org').get(getSignUpPage).post(postSignUpPage);
-router.route('/register/user').get(getUserSignUpPage).post(postUserSignUpPage);
-router.route('/login/org').get(getLoginPage).post(postLoginPage);
-router.route('/login/user').get(getUserLoginPage).post(postUserLoginPage);
+router.route('/signup_c.html').post(postSignUpPage);
+router.route('/signup_u.html').post(postUserSignUpPage);
+router.route('/login_c.html').post(postLoginPage);
+router.route('/login_u.html').post(postUserLoginPage);
 router.route('/logout').get(getLogoutPage);
 
 module.exports=router;

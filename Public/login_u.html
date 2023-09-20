@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="login_u.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600&family=Inter:wght@500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body style="background-color: black">
+            <div class="header">
+                <div class="left">
+                    <div class="baldevlogo"><img src="logo.svg" alt=""></div>
+            </div>
+            <div class="center">
+                <div class="basic"><button class="home"><a href="home.html">Home</a></button></div>
+                <div class="basic"><button class="home">About Us</button></div>
+                <div class="basic"><button class="home">Contact Us</button></div>
+        </div></div>
+      <div class="sbox"><img src="Group 16.svg" alt=""></div>
+      <div class="sbox1"><img src="Group 18.svg" alt=""></div>
+      <form>
+        <span class="username">Username</span><input type="text" class="fill1" name="username"><span class="username error"></span><br><br>
+        <span class="username">Password</span><input type="password" class="fill2" name="password"><span class="password error"></span><br><br>
+        <input class="sbutton1" type="submit" value="Login">
+      </form>
+      <div class="acc">Don't have an account? <a href="signup_u.html"><u>SignUp</u></a><br><a href="signup_c.html"><u>SignUp</u></a> as organisation</div>
+      <img class="rotate" src="circle2.svg" alt="">
+        </body>
+        </html>
+
+        <script>
+           const form = document.querySelector('form');
+    const usernameError=document.querySelector('.username.error');
+    const passwordError=document.querySelector('.password.error');
+
+//reset Error message
+    usernameError.textContent='';
+     passwordError.textContent='';
+
+    form.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+
+        //get the value
+        const username = form.username.value;
+        const password=form.password.value;
+        console.log(username,password);
+
+        try {
+            const res=await fetch('/login_u.html',{
+                method: 'POST',
+                body:JSON.stringify({username,password}),
+                headers: {'Content-Type': 'application/json'}
+
+            })
+            const data=await res.json();
+            console.log(data);
+
+       if(data.errors){
+                   usernameError.textContent=data.errors.email;
+                   passwordError.textContent=data.errors.password;
+            }
+
+       
+        } catch (error) {
+            console.log(error);
+        }
+        
+    })
+        </script>

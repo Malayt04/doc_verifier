@@ -1,0 +1,84 @@
+ /* BAL.dev */
+
+
+/* identical to box height */
+letter-spacing: 0.05em;
+
+color: #FFFFFF;
+
+border: 1px solid #FFFFFF;
+[10:21 am, 20/09/2023] Divyanshu Vit: /* Frame 3 */
+
+/* Auto layout */
+display: flex;
+flex-direction: row;
+align-items: flex-start;
+padding: 0px;
+gap: 77px;
+
+position: absolute;
+width: 407px;
+height: 24px;
+left: 517px;
+top: 38px;
+
+
+
+/* Home - button */
+
+width: 56px;
+height: 24px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 0;
+flex-grow: 0;
+
+
+/* About US - button */
+
+width: 90px;
+height: 24px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+/* Inside auto layout */
+flex: none;
+order: 1;
+flex-grow: 0;
+
+
+/* Contact Us - button */
+
+width: 107px;
+height: 24px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 24px;
+
+color: #FFFFFF;
+
+
+/* navigation bar */
+flex: none;
+order: 2;
+flex-grow: 0;
