@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="signup_u.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600&family=Inter:wght@500&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body style="background-color: black">
+            <div class="header">
+                <div class="left">
+                    <div class="baldevlogo"><img src="logo.svg" alt=""></div>
+            </div>
+            <div class="center">
+                <div class="basic"><button class="home"><a href="home.html">Home</a></button></div>
+                <div class="basic"><button class="home">About Us</button></div>
+                <div class="basic"><button class="home">Contact Us</button></div>
+        </div></div>
+        <div class="signup_c"><img src="Group 17.svg" alt=""></div>
+        <div class="sbox"><img style="height: 280px; width: auto;" src="Group 14.svg" alt=""></div>
+
+       <form>
+        <span class="name ">Name</span>&nbsp;&nbsp;&nbsp;<input class="fill1" name="name" type="text"><span class="name error"></span><br><br>
+        <span class="name email">Email</span>&nbsp;&nbsp;&nbsp;<input class="fill2" name="email" type="email"><span class="email error"></span><br><br>
+        <span class="name username">Username</span>&nbsp;&nbsp;&nbsp;<input class="fill3" name="username" type="text"><span class="username error"></span><br><br>
+        <span class="name password">Password</span>&nbsp;&nbsp;&nbsp;<input class="fill4" name="password" type="password"><span class="password error"></span><br><br>
+        <input class="sbutton1" type="submit" value="SignUp">
+       </form>
+       <div class="sbutton">
+        
+       </div>
+       <div class="a">Already have an account? <a href="login_u.html"><u>Login</u></a></div>
+       <div class="a1"><a href="signup_c.html"><u>SignUp</u></a> as organisation</div>
+       <div><img class="rotate" src="circle2.svg" alt=""></div>
+       <div><img class="rotate1" src="circle2.svg" alt=""></div>
+    </body>
+</html>
+<script>
+    const form = document.querySelector('form');
+    const nameError=document.querySelector('.name.error');
+    const emailError=document.querySelector('.email.error');
+    const usernameError=document.querySelector('.username.error');
+    const passwordError=document.querySelector('.password.error');
+
+//reset Error message
+     emailError.textContent='';
+     passwordError.textContent='';
+     nameError.textContent='';
+     usernameError.textContent='';
+
+
+    form.addEventListener('submit',async (e)=>{
+        e.preventDefault();
+
+        //get the value
+        const username=form.username.value;
+        const name=form.name.value;
+        const email = form.email.value;
+        const password=form.password.value;
+        console.log(email,password,name,username);
+
+        try {
+            const res=await fetch('/signup_u.html',{
+                method: 'POST',
+                body:JSON.stringify({name,email,username,password}),
+                headers: {'Content-Type': 'application/json'}
+
+            })
+            const data=await res.json();
+            console.log(data);
+
+            if(data.err){
+                   usernameError.textContent = data.err.username;
+                   nameError.textContent = data.err.name;
+                   emailError.textContent=data.err.email;
+                   passwordError.textContent=data.err.password;
+            }
+
+         
+
+        } catch (error) {
+            console.log(error.name,error.email,error.username);
+        }
+        
+    })
+</script>

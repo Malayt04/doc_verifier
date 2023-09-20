@@ -5,6 +5,7 @@ const bcrypt=require('bcrypt');
 
 
 
+
 const maxAge=3*24*60*60;
 
 
@@ -65,19 +66,6 @@ const handleOrgError=(err)=>{
     return errors;
 }
 
-
-
-
-
-
-const getSignUpPage=(req,res)=>{
-    res.send('signup');
-}
-
-const getLoginPage=(req,res)=>{
-    res.send('login');
-}
-
 const postLoginPage=async(req,res)=>{
     const { username, password } = req.body;
     try {
@@ -104,14 +92,6 @@ const postSignUpPage = async (req, res) => {
         res.status(500).json({err})
     }
   }
-const getUserSignUpPage=(req,res)=>{
-    res.send('signup');
-}
-
-const getUserLoginPage=(req,res)=>{
-    res.send('login');
-}
-
 
 const postUserLoginPage = async (req, res) => {
     const { username, password } = req.body;
@@ -126,9 +106,9 @@ const postUserLoginPage = async (req, res) => {
   };
   
 const postUserSignUpPage=async (req,res)=>{
-    const {firstName,lastName,email,username,password}=req.body;
+    const {name,email,username,password}=req.body;
     try {
-        const user=await User.create({firstName,lastName,email,username,password});
+        const user=await User.create({name,email,username,password});
         const token=createToken(user._id);
         res.cookie('jwt',token,{httpOnly:true,maxAge:maxAge*1000});
         console.log(user);
@@ -148,4 +128,4 @@ const getLogoutPage=(req,res)=>{
 
 
 
-module.exports ={ getSignUpPage,postSignUpPage,getLoginPage,postLoginPage, getUserSignUpPage,postUserSignUpPage,getUserLoginPage,postUserLoginPage,getLogoutPage};
+module.exports ={postSignUpPage,postLoginPage,postUserSignUpPage,postUserLoginPage,getLogoutPage};

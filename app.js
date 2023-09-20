@@ -6,18 +6,27 @@ const orgRoutes=require('./Routes/organisationRoute');
 const userRoutes=require('./Routes/userRoute');
 const bodyParser=require('body-parser');
 const cookieParser = require('cookie-parser');
+const path = require('path');
+
+
 
 dotenv.config();
 const app=express();
 
 
+
+
+app.use(express.static('Public'));
+const publicPath = path.join(__dirname, 'Public');
+app.use(express.static(publicPath));
 app.use(express.json());
-app.use('/auth',authRoutes);
-app.use('/org',orgRoutes);
-app.use('/user',userRoutes);
+app.use('/',authRoutes);
+app.use('/',orgRoutes);
+app.use('/',userRoutes);
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
+
 
 
 
@@ -30,7 +39,10 @@ mongoose.connect(process.env.URI,{ useNewUrlParser: true, useUnifiedTopology: tr
 
 
 app.get('/',(req,res)=>{
-    res.send("Welcome to our home page");
+
+        const filePath = path.join(publicPath, 'home.html');  // Replace with the desired HTML file
+        res.sendFile(filePath);
+      
 })
 
 
