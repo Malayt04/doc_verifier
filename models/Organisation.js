@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
-const {isEmail}=require('validator');
-const bcrypt=require('bcrypt');
+import mongoose from 'mongoose';
+
 
 
 const regUsers=mongoose.Schema({
@@ -8,28 +7,27 @@ const regUsers=mongoose.Schema({
 
         fullName:{
             type:String,
-            required: [true,'Please enter a name'],
+            required: true
         },
         userEmail:{
             type:String,
-            required:[true,'Please enter a valid email address'],
+            required:true,
             lowercase:true,
-            validate:[isEmail,'Please enter a valid email address']
             },
         category:{
             type:String,
-            required:[true,'Please enter a valid category']
+            required:true
         },
         dateOfIssue:{
             type:Date,
-            required:[true,'Please enter a valid date']
+            required:true
         },
     issuedBy:{
         type:String,
-        required:[true,'Please enter a valid name']
+        required:true
         },
 
-    hashPdss:{
+    hashPass:{
         type:String
     }
 
@@ -43,62 +41,34 @@ const orgSchema=new mongoose.Schema({
 
 name:{
     type:String,
-    required:[true,'Please enter  name ot your organisation. '],
-    minlength:[3,'Name of the organisation should be longer than 3 characters']
+    required:true,
+    minlength:3
 }
 ,
 email:{
 type:String,
-required:[true,'Please enter a valid email address'],
+required:true,
 lowercase:true,
-validate:[isEmail,'Please enter a valid email address']
 }
 ,
 password: {
     type: String,
-    required: [true, 'Please enter a valid password'],
-    minlength: [8,'password should be at least 8 characters']
+    required: true,
+    minlength: 8
 },
 
 username:{
     type:String,
     unique:true,
-    required:[true,'Please enter a username'],
-    minlength:[3,'Username of the organisation should be longer than 3 characters']
+    required:true,
+    lowercase:true,
+    minlength:3
 },
+
 regestiredUsers:[regUsers],
 
-history:[
-    {
-        tokenAddress:{
-            type:String
-        }
-    }
-]
 });
 
-
-orgSchema.pre('save',async function(next){
-    const salt=await bcrypt.genSalt();
-    this.password=await bcrypt.hash(this.password,salt);
-     next();
-  })
-
-
-orgSchema.statics.login=async function (username,password){
-    const org=await this.findOne({username});
-    if(org){
-      const auth= await  bcrypt.compare(password,org.password);
-    
-      if(auth){
-        return org;
-      }
-      throw Error('Incorrect password');
-    }
-    throw Error('incorrect username')
-    ;
-    }
-    
 
 
 

@@ -1,66 +1,36 @@
-const mongoose=require('mongoose');
-const {isEmail}=require('validator');
-const bcrypt=require('bcrypt');
-
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
 
     name:{
         type:String,
-        required:[true,'Please enter  name '],
-        minlength:[3,'Name of the user should be longer than 3 characters']
+        required:true,
+        minlength:3
     }
     ,
     email:{
     type:String,
-    required:[true,'Please enter a valid email address'],
+    required:true,
     unique:true,
     lowercase:true,
-    validate:[isEmail,'Please enter a valid email address']
     }
     ,
     password:{
         type:String,
-        required:[true,'Please enter a valid password'],
-        minlength:[8,'Password must be at least 8 characters']
+        required:true,
+        minlength:8
     },
     username:{
         type:String,
         unique:true,
-        required:[true,'Please enter a username'],
-        minlength:[3,'Username of the user should be longer than 3 characters']
+        required:true,
+        minlength:3
     },
     history:[]
 
 });
 
 
-
-userSchema.pre('save',async function(next){
-  const salt=await bcrypt.genSalt();
-  this.password=await bcrypt.hash(this.password,salt);
-   next();
-})
-
-
-userSchema.statics.login = async function (username, password) {
-    try {
-      const user = await this.findOne({ username });
-      
-      if (user) {
-        const auth = await bcrypt.compare(password, user.password);
-  
-        if (auth) {
-          return user;
-        }
-        throw new Error('Incorrect password');
-      }
-      throw new Error('Incorrect username');
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  };
-
 const User=mongoose.model('User',userSchema);
 
-module.exports = User;
+export default User;
