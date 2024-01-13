@@ -9,18 +9,20 @@ const uri=process.env.URI
 const port=process.env.PORT
 
 app.use(express.json());
-app.use('/auth',authRoute);
+app.use('/api/auth',authRoute);
 
-app.use((req,res,next,err)=>{
-    const statusCode=err.statusCode||500;
-    const message=err.message||'Internal Server Error';
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
 
     return res.status(statusCode).json({
-        success:false,
+        success: false,
         statusCode,
         message
-    })
-})
+    });
+});
+
+
 
 mongoose.connect(uri)
 .then(app.listen(port, ()=>{

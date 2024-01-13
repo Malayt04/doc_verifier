@@ -1,7 +1,7 @@
 import express from 'express';
-import {orgSignIn} from '../controllers/authControllers.js';
+import {orgSignUp} from '../controllers/authControllers.js';
 const router=express.Router();
 
-router.route('/org/signin').post(orgSignIn);
+router.route('/org/signup').post(orgSignUp);
 
 export default router;
