@@ -4,5 +4,6 @@ const router=express.Router();
 
 router.route('/org/signup').post(orgSignUp);
 router.route('/org/signin').post(orgSignIn);
+router.route('/user/signup');
 
 export default router;

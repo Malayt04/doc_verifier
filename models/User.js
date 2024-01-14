@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
 
+const userHistory=new mongoose.Schema({
+    fileName:{
+        type: String,
+    }
+},
+{timestamp:true}
+)
+
 const userSchema = new mongoose.Schema({
 
     name:{
@@ -26,7 +34,7 @@ const userSchema = new mongoose.Schema({
         required:true,
         minlength:3
     },
-    history:[]
+    history:[userHistory]
 
 });
 
