@@ -55,7 +55,7 @@ function SignUpOrg() {
 
   return (
     <div className="p-3 max-w-lg mx-auto">
-    <h1 className='text-3xl text-center font-semibold my-7'>Sign up</h1>
+    <h1 className='text-3xl text-center font-semibold my-7'>Sign up as an Organisation</h1>
     <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
       <input type='text' className='border p-3 rounded-lg' id='name' placeholder='Name' onChange={handleChange}/>
       <input type='text' className='border p-3 rounded-lg' id='username' placeholder='Username' onChange={handleChange}/>

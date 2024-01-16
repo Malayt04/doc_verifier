@@ -11,7 +11,7 @@ function Header() {
            <Link to='/'><li className='hidden sm:inline text-slate-100 hover:underline'>Home</li></Link> 
            <Link to='/about'> <li className='hidden sm:inline text-slate-100 hover:underline'>About Us</li></Link>
            <Link to='/contactus'><li className='hidden sm:inline text-slate-100 hover:underline'>Contact us</li></Link>
-           <Link to='/signin/org'><li className='hidden sm:inline text-slate-100 hover:underline'>SignIn</li></Link>
+           <Link to='/signup/org'><li className='hidden sm:inline text-slate-100 hover:underline'>SignUp</li></Link>
           </ul>
         </div>
       </header>

@@ -57,7 +57,7 @@ function SignUpUser() {
 
   return (
     <div className="p-3 max-w-lg mx-auto">
-    <h1 className='text-3xl text-center font-semibold my-7'>Sign up</h1>
+    <h1 className='text-3xl text-center font-semibold my-7'>Sign up As a user</h1>
     <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
       <input type='text' className='border p-3 rounded-lg' id='name' placeholder='Name' onChange={handleChange}/>
       <input type='text' className='border p-3 rounded-lg' id='username' placeholder='Username' onChange={handleChange}/>
@@ -67,7 +67,7 @@ function SignUpUser() {
     </form>
     <div className="flex gap-2 mt-5">
     <p>Already have an account? <Link to='/signin/user'><span className="text-blue-700 hover:underline">Sign in</span></Link></p>
-    <p>To sign up as an organisation:  <Link to='/signin/user'><span className="text-blue-700 hover:underline">Click here</span></Link></p>
+    <p>To sign in as an organisation:  <Link to='/signup/org'><span className="text-blue-700 hover:underline">Click here</span></Link></p>
   </div>
   {error && <p className="text-red-500">{error}</p>}
   </div>

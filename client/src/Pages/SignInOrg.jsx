@@ -4,7 +4,7 @@ import {useDispatch,useSelector} from 'react-redux'
 import { signInStart,signInFailure,signInSuccess } from "../redux/organisation/orgSlice.js" 
 
 
-function SignInOrg() {
+function SignInUser() {
   const [formData,setFormData] =useState({
     email:'',password:''
   })
@@ -63,4 +63,4 @@ function SignInOrg() {
   )
 }
 
-export default SignInOrg
+export default SignInUser
