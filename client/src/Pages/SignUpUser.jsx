@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link,useNavigate } from "react-router-dom";
 
 
-function SignUpOrg() {
+function SignUpUser() {
   const [formData, setFormData] = useState({
     name: '',
     username: '',
@@ -30,7 +30,7 @@ function SignUpOrg() {
       }
 
       setLoading(true);
-      const res = await fetch('/api/auth/org/signup', {
+      const res = await fetch('/api/auth/user/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -38,6 +38,7 @@ function SignUpOrg() {
       const data = await res.json();
 
       if (!data.success) {
+        console.log(data);
         setError(data.message || 'Something went wrong');
         setLoading(false);
         return;
@@ -48,6 +49,7 @@ function SignUpOrg() {
       navigate('/');
 
     } catch (error) {
+      console.log(error.message);
       setLoading(false);
       setError(error.message || 'Something went wrong');
     }
@@ -64,14 +66,14 @@ function SignUpOrg() {
       <button disabled={loading} type='submit' className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">{loading?'Loading':'Sign Up'}</button>
     </form>
     <div className="flex gap-2 mt-5">
-    <p>Already have an account? <Link to='/signin/org'><span className="text-blue-700 hover:underline">Sign in</span></Link></p>
-    <p>To sign in as a user:  <Link to='/signin/user'><span className="text-blue-700 hover:underline">Click here</span></Link></p>
+    <p>Already have an account? <Link to='/signin/user'><span className="text-blue-700 hover:underline">Sign in</span></Link></p>
+    <p>To sign up as an organisation:  <Link to='/signin/user'><span className="text-blue-700 hover:underline">Click here</span></Link></p>
   </div>
   {error && <p className="text-red-500">{error}</p>}
   </div>
 )
 }
 
-export default SignUpOrg;
+export default SignUpUser;
 
    

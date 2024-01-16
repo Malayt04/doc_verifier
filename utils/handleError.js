@@ -1,6 +1,6 @@
-export const handelError=(statusCode,message)=>{
+export const handleError=(statusCode,message)=>{
     const error= new Error();
-    error.statusCode=statussCode;
-    error.messege=message;
+    error.statusCode=statusCode;
+    error.message=message;
     return error;
 }

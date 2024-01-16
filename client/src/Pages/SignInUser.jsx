@@ -1,15 +1,15 @@
 import { useState } from "react"
 import {useNavigate,Link} from 'react-router-dom'
 import {useDispatch,useSelector} from 'react-redux'
-import { signInStart,signInFailure,signInSuccess } from "../redux/organisation/orgSlice.js" 
+import { signInStart,signInFailure,signInSuccess } from "../redux/user/userSlice.js" 
 
 
-function SignInOrg() {
+function SignInUser() {
   const [formData,setFormData] =useState({
     email:'',password:''
   })
 
-  const {loading, error}= useSelector((state)=>state.organisation);
+  const {loading, error}= useSelector((state)=>state.user);
 
   const dispatch=useDispatch();
 
@@ -26,7 +26,7 @@ function SignInOrg() {
     try {
       e.preventDefault();
       dispatch(signInStart());
-      const res= await fetch('/api/auth/org/signin',{
+      const res= await fetch('/api/auth/user/signin',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,4 +63,4 @@ function SignInOrg() {
   )
 }
 
-export default SignInOrg
+export default SignInUser
